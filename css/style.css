@@ -1,0 +1,39 @@
+body {
+    text-align: center;
+}
+
+.grassBlock{
+background-image: url(../images/grass-block.png);
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+height: 250px;
+width: 250px;
+    margin-top: -74px;
+
+}
+
+.waterBlock{
+    background-image: url(../images/water-block.png);
+    height: 63px;
+    width: 250px;
+    border: solid 1px;
+    background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+}
+
+.stoneBlock{
+    background-image: url(../images/stone-block.png);
+    height: 60px;
+    width: 250px;
+    border: solid 1px;
+    background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+}
+
+.block {
+    display:flex;
+
+}
