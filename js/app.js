@@ -1,12 +1,11 @@
 // ENEMY CLASS WITH ATTRIBUTE AND METHODS
 
 class Enemy {
-    constructor(y, x, name) {
+    constructor(y, x, ) {
         this.x = x;
         this.y = y;
         this.speed = 0;
         this.sprite = 'images/enemy-bug.png';
-        this.name = name;
         this.setRandomSpeed()
     }
 
@@ -39,12 +38,12 @@ class Player {
     }
     update() {
         this.render(this.x, this.y)
-        this.collisionDetection();
+        this.checkCollisions();
     }
-    collisionDetection() {
+    checkCollisions() {
         for (let enemy of allEnemies) {
-            var collisionDetected = enemy.y + 25 >= this.y && enemy.y - 25 <= this.y && (enemy.x + 50 >= this.x && enemy.x - 50 <= this.x);
-            if (collisionDetected) {
+            let checkCollisions = enemy.y + 25 >= this.y && enemy.y - 25 <= this.y && (enemy.x + 50 >= this.x && enemy.x - 50 <= this.x);
+            if (checkCollisions) {
                 alert("Try again");
                 this.x = 200;
                 this.y = 425;
@@ -68,9 +67,15 @@ class Player {
             this.y -= 50;
             console.log(this.y)
         }
-        if (this.y < -24)
-            setTimeout(function () { alert("Congrats you have WON"); }, 100);
+        if (this.y < -24) {
+            gameWin();
+        }
     }
+
+}
+
+function gameWin() {
+    setTimeout(function () { alert("Congrats you have WON"); }, 100);
 
 }
 
@@ -80,7 +85,7 @@ class Player {
 
 let player = new Player();
 let enemy = new Enemy(65, -50, 'pip');
-let enemy2 = new Enemy(125, -80, 'abc');
+let enemy2 = new Enemy(135, -80, 'abc');
 let enemy3 = new Enemy(225, -60, 'rudi');
 let allEnemies = [enemy, enemy2, enemy3];
 console.log(allEnemies);
