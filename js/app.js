@@ -1,19 +1,25 @@
 // ENEMY CLASS WITH ATTRIBUTE AND METHODS
 
 class Enemy {
-    constructor(y, x) {
+    constructor(y, x, name) {
         this.x = x;
         this.y = y;
         this.speed = 0;
         this.sprite = 'images/enemy-bug.png';
+        this.name = name;
+        this.setRandomSpeed()
     }
-    randomSpeed() {
-        let randomNum = Math.floor(Math.random() * (80 - 30 + 1)) + 30;
-        this.speed = randomNum;
+
+    setRandomSpeed() {
+        this.speed = this.calculateRandomSpeed();
     }
+    calculateRandomSpeed() {
+        return Math.floor(Math.random() * (80 - 30 + 1)) + 30;
+    }
+
     update(dt) {
         if (this.x > 550) {
-            this.randomSpeed();
+            this.setRandomSpeed();
             this.x = -50;
         }
         this.x += dt * this.speed;
@@ -33,13 +39,16 @@ class Player {
     }
     update() {
         this.render(this.x, this.y)
+        this.collisionDetection();
+    }
+    collisionDetection() {
         for (let enemy of allEnemies) {
-            if (this.y == enemy.y && enemy.x + 50 >= this.x && enemy.x - 50 <= this.x) {
+            var collisionDetected = enemy.y + 25 >= this.y && enemy.y - 25 <= this.y && (enemy.x + 50 >= this.x && enemy.x - 50 <= this.x);
+            if (collisionDetected) {
                 alert("Try again");
                 this.x = 200;
                 this.y = 425;
             }
-
         }
     }
     render() {
@@ -70,15 +79,12 @@ class Player {
 /// INIT CLASSES TO MAKE PLAYERS AND ENEMIES
 
 let player = new Player();
-let enemy = new Enemy(65, -50);
-let enemy2 = new Enemy(140, -80);
-let enemy3 = new Enemy(225, -60);
+let enemy = new Enemy(65, -50, 'pip');
+let enemy2 = new Enemy(125, -80, 'abc');
+let enemy3 = new Enemy(225, -60, 'rudi');
 let allEnemies = [enemy, enemy2, enemy3];
+console.log(allEnemies);
 
-
-allEnemies.forEach(function (enemy) {
-    enemy.randomSpeed();
-});
 
 document.addEventListener('keyup', function (e) {
     var allowedKeys = {
